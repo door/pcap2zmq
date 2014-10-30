@@ -1,0 +1,13 @@
+#!/bin/sh
+# -*- mode: sh; coding: utf-8-unix; -*-
+
+# DAEMON=/usr/local/bin/pcap2zmq
+
+BINDIR=`dirname $0`
+DAEMON=$BINDIR/pcap2zmq
+
+BRAS=192.168.100.2
+
+exec $DAEMON -d \
+    -c "eth0, vlan 100 and host $BRAS and udp and ( port 1812 or port 1813 )" \
+    -c "eth1, vlan 200 and host $BRAS and udp and ( port 1812 or port 1813 )"
